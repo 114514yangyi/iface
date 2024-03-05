@@ -213,32 +213,80 @@ $(function ($) {
 });
 
 
-
+//////////////////入口函数/////////////////////
 
 
 $("#submit").click(function () {
     
-    var file = $("#fileupload")[0].files[0];
-    var formData = new FormData();
-    formData.append("file",file);
-    console.log(formData);
 
-    $.ajax({
-        type: "POST",
-        url: "http://146.56.205.121:8080/upload",
-        data: formData,
-        processData: false,
-        contentType: false,
-        error: function (data) {
-            console.log("上传失败！")
-            alert("上传失败！")
-        },
-        success: function (data) {
-            console.log("上传成功！")
-            alert("上传成功！")
-        },
-    });
+    var file1 = document.getElementById('fileupload').files[0];
+    var maxSizeInBytes =  10*1024*1024;
+    var filesize = file1.size;
+    console.log(filesize);
+    if (filesize <= maxSizeInBytes) {
+        var file = $("#fileupload")[0].files[0];
+        var formData = new FormData();
+        formData.append("file", file);
+        console.log(formData);
+
+        $.ajax({
+            type: "POST",
+            url: "http://146.56.205.121:8080/upload",
+            data: formData,
+            processData: false,
+            contentType: false,
+            error: function (data) {
+                console.log("上传失败！")
+                alert("上传失败！")
+            },
+            success: function (data) {
+                console.log("上传成功！")
+                alert("上传成功！")
+            },
+        });
+
+
+        console.log("上传成功！");
+    }
+    else {
+        alert("文件大小不得超过10MB");
+    }
+
+
+
+
+    // var file = $("#fileupload")[0].files[0];
+    // var formData = new FormData();
+    // formData.append("file",file);
+    // console.log(formData);
+
+    // $.ajax({
+    //     type: "POST",
+    //     url: "http://146.56.205.121:8080/upload",
+    //     data: formData,
+    //     processData: false,
+    //     contentType: false,
+    //     error: function (data) {
+    //         console.log("上传失败！")
+    //         alert("上传失败！")
+    //     },
+    //     success: function (data) {
+    //         console.log("上传成功！")
+    //         alert("上传成功！")
+    //     },
+    // });
 });
+
+
+
+ // 获取按钮和输入框的引用
+ var button = document.getElementById("mask");
+ var fileupload = document.getElementById("fileupload");
+
+ // 添加点击事件监听器
+ button.addEventListener("click", function() {
+   fileupload.click(); // 模拟点击输入框
+ });
 
 
 

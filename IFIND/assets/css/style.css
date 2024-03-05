@@ -29,6 +29,11 @@ body {
     height: 0hv;
   }
 
+  #mask {
+    cursor: pointer;
+    /* z-index: -1; */
+  }
+
   .col-lg-5{
     right: 170px;
     border-radius: 10px; /* 设置圆角大小 */

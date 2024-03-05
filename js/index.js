@@ -118,7 +118,16 @@ $(function() {
 
 });
 
+/////////////////////////入口函数/////////////////////////
 
+
+
+function validateEmail(email) {
+   // 定义邮箱格式的正则表达式
+   var re = /\S+@\S+\.\S+/;
+   // 使用正则表达式进行匹配验证
+   return re.test(email);
+}
 
 $(".button.login button").click(function() {
    console.log("登录");
@@ -145,39 +154,56 @@ $(".button.login button").click(function() {
 
  $("#register").click(function() {
    console.log("注册");
-   $.ajax({
-     url: "http://146.56.205.121:8080/user/register",
-     type: "post",
-     data: {
-       username: $("#regname").val(),
-       password: $("#regpass").val(),
-         email: $("#reregpass").val()
-     },
-     success: function(result) {
-      console.log(result);
-       if (result) {
-         alert("注册成功,请重新登录");
-       } else {
-         alert("注册失败");
-       }
-     },
-     error: function(xhr, status, error) {
-       console.log("An error occurred: " + error);
-     }
-   });
+
+    if (!validateEmail($("#reregpass"))) {
+       alert("邮箱格式错误, 请重新输入");
+    }
+    else {
+       $.ajax({
+          url: "http://146.56.205.121:8080/user/register",
+          type: "post",
+          data: {
+             username: $("#regname").val(),
+             password: $("#regpass").val(),
+             email: $("#reregpass").val()
+          },
+          success: function (result) {
+             console.log(result);
+             if (result) {
+                alert("注册成功,请重新登录");
+             } else {
+                alert("注册失败");
+             }
+          },
+          error: function (xhr, status, error) {
+             console.log("An error occurred: " + error);
+          }
+       });
+    }
+
+
+
+
+
+   // $.ajax({
+   //   url: "http://146.56.205.121:8080/user/register",
+   //   type: "post",
+   //   data: {
+   //     username: $("#regname").val(),
+   //     password: $("#regpass").val(),
+   //       email: $("#reregpass").val()
+   //   },
+   //   success: function(result) {
+   //    console.log(result);
+   //     if (result) {
+   //       alert("注册成功,请重新登录");
+   //     } else {
+   //       alert("注册失败");
+   //     }
+   //   },
+   //   error: function(xhr, status, error) {
+   //     console.log("An error occurred: " + error);
+   //   }
+   // });
  });
 
-// $(".button.login button").click(function() {
-//    // 获取输入框中的用户名和密码
-//    var username = $("#name").val();
-//    var password = $("#pass").val();
-   
-//    // 这里是简单的用户名和密码验证逻辑，你需要根据实际需求进行修改
-//    if ((username === "123456" && password === "123456")||(username=="yingying" && password=="0914")) {
-//       // 用户名和密码验证成功，跳转到另一个页面
-//       window.location.href = "IFIND/index.html";
-//    } else {
-//       // 用户名或密码验证失败，显示错误消息或执行其他操作
-//       alert("用户名或密码不正确，请重试。");
-//    }
-// });

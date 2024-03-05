@@ -15,8 +15,14 @@
 .logo {
    position: absolute;
    top: 100px; /* 调整上下偏移量 */
-   left: 20px; /* 调整左右偏移量 */
+   left: 200px; /* 调整左右偏移量 */
    
+}
+
+.draft {
+   position: absolute;
+   top: 180px; /* 调整上下偏移量 */
+   right: -50px; /* 调整左右偏移量 */
 }
 
 .box.back {
