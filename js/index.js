@@ -156,7 +156,7 @@ $(".button.login button").click(function() {
    console.log("注册");
 
     if (!validateEmail($("#reregpass"))) {
-       alert("邮箱格式错误, 请重新输入");
+       alert("邮箱格式错误, 请重新输入(要包含@)");
     }
     else {
        $.ajax({
